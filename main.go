@@ -1,8 +1,11 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net/http"
+	"runtime/debug"
+
+	"github.com/gin-gonic/gin"
 )
 
 const (
@@ -11,9 +14,18 @@ const (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
-		w.Write([]byte("^_^"))
+	defer func() {
+		fmt.Println("Server shutdown...")
+		if err := recover(); err != nil {
+			fmt.Println(err, string(debug.Stack()))
+		}
+	}()
+
+	router := gin.Default()
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.String(http.StatusOK, "^_^")
 	})
+	router.Run()
 
 	//log.Println("init line bot")
 	//bot, err := linebot.New(secret, token)
@@ -49,9 +61,4 @@ func main() {
 	//		}
 	//	}
 	//})
-
-	log.Print("serve port: 8080")
-	if err := http.ListenAndServe(":8080", nil); err != nil {
-		log.Fatal(err)
-	}
 }
