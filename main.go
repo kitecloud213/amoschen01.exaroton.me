@@ -31,7 +31,9 @@ func main() {
 
 	router := gin.Default()
 
-	router.POST("/", func(ctx *gin.Context) {
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.String(http.StatusOK, "^_^")
+	}).POST("/", func(ctx *gin.Context) {
 		ctx.String(http.StatusOK, "^_^")
 	})
 
