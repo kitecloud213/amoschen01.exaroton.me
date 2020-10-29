@@ -47,17 +47,21 @@ func main() {
 				switch message := event.Message.(type) {
 				case *linebot.TextMessage:
 					if _, err = botInstance.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
-						log.Print(err)
+						ctx.JSON(http.StatusInternalServerError, err)
+						return
 					}
 				case *linebot.StickerMessage:
 					replyMessage := fmt.Sprintf(
 						"sticker id is %s, stickerResourceType is %s", message.StickerID, message.StickerResourceType)
 					if _, err = botInstance.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(replyMessage)).Do(); err != nil {
-						log.Print(err)
+						ctx.JSON(http.StatusInternalServerError, err)
+						return
 					}
 				}
 			}
 		}
+
+		ctx.JSON(http.StatusOK, map[string]interface{}{"msg": "ok"})
 	})
 
 	router.Run()
