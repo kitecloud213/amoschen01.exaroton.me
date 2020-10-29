@@ -53,8 +53,8 @@ func main() {
 		}
 	})
 
-	log.Print("serve port: 9527")
-	if err := http.ListenAndServe(":9527", nil); err != nil {
+	log.Print("serve port: 80")
+	if err := http.ListenAndServe(":80", nil); err != nil {
 		log.Fatal(err)
 	}
 }
