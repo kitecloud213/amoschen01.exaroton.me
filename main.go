@@ -32,19 +32,6 @@ func main() {
 	router := gin.Default()
 
 	router.GET("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "^_^")
-	}).POST("/", func(ctx *gin.Context) {
-		ctx.String(http.StatusOK, "^_^")
-	})
-	router.GET("/line/init", func(ctx *gin.Context) {
-		err := InitLineBot()
-		if err != nil {
-			ctx.JSON(http.StatusBadRequest, err)
-		} else {
-			ctx.String(http.StatusOK, "ok")
-		}
-	})
-	router.POST("/callback", func(ctx *gin.Context) {
 		req := ctx.Request
 		events, err := botInstance.ParseRequest(req)
 		if err != nil {
