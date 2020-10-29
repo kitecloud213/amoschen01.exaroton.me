@@ -13,4 +13,4 @@ RUN apk --no-cache add ca-certificates
 COPY --from=builder /go/bin/amoschen01.exaroton.me /amoschen01.exaroton.me
 ENTRYPOINT ./amoschen01.exaroton.me
 LABEL Name=amoschen01.exaroton.me Version=0.0.1
-EXPOSE 8080
+EXPOSE 9527
