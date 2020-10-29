@@ -11,7 +11,7 @@ const (
 )
 
 func main() {
-	http.HandleFunc("/health", func(w http.ResponseWriter, req *http.Request) {
+	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
 		w.Write([]byte("^_^"))
 	})
 
