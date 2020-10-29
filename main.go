@@ -20,6 +20,10 @@ func main() {
 		log.Fatal(err)
 	}
 
+	http.HandleFunc("/health", func(w http.ResponseWriter, req *http.Request) {
+		w.Write([]byte("^_^"))
+	})
+
 	log.Println("set line bot callback func")
 	http.HandleFunc("/callback", func(w http.ResponseWriter, req *http.Request) {
 		events, err := bot.ParseRequest(req)
